@@ -29,7 +29,7 @@ class AdminController extends Controller
             return redirect('/')->with('failed', 'Please login');
         }
 
-        return view('moderator/dashboard');
+        return redirect('/games');
     }
     
     public function gameListScreen() {
@@ -68,13 +68,22 @@ class AdminController extends Controller
         
     }
     
-    public function gameDelete() {
-        
+    public function gameDelete($id) {
+        $game = Game::findOrFail($id);
+        $game->ratings->each(fn($rating) => $rating->delete());
+        $game->delete();
+
+        return redirect()->back()->with('success', 'Game deleted');
     }
 
     public function logout() {
         auth()->guard('moderator')->logout();
         return redirect('/login')->with('success', 'You have logged out.');
+    }
+
+    public function reviewView($id) {
+        $game = Game::findOrFail($id);
+        return view('moderator/rating', compact('game'));
     }
     
 }

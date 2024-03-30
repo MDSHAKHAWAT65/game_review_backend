@@ -39,14 +39,20 @@ class WebsiteController extends Controller
         }
 
 
-        // $access_token = '21963b8af66677';
-        // $client = new IPinfo($access_token);
-        // $ip_address = '27.125.244.114'; // $request->ip();
-        // $details = $client->getDetails($ip_address);
+        $access_token = '21963b8af66677';
+        $client = new IPinfo($access_token);
+        $ip_address = $request->ip();
+        $details = $client->getDetails($ip_address);
 
         $data['user_id'] = auth()->guard('web')->user()->id;
-        $data['coordinate'] = '123,123';
-        // $data['coordinate'] = $details->loc;
+        $data['coordinate'] = $details->loc;
+        $data['coordinate_info'] = json_encode([
+            'ip' => $details->ip,
+            'city' => $details->city,
+            'region' => $details->region,
+            'country' => $details->country,
+            'postal' => $details->postal,
+        ]);
 
         $game = Game::findOrFail($request->game_id);
         $game->ratings()->create($data);

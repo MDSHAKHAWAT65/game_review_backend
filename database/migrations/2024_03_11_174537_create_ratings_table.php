@@ -18,6 +18,7 @@ return new class extends Migration
             $table->double('rating');
             $table->text('comment')->nullable();
             $table->string('coordinate');
+            $table->text('coordinate_info')->nullable();
             $table->timestamps();
         });
     }

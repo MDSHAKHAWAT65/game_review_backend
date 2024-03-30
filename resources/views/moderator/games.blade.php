@@ -22,6 +22,8 @@
               <th scope="col">Title</th>
               <th scope="col">Image</th>
               <th scope="col">Status</th>
+              <th scope="col" width="20%">View Ratings</th>
+              <th scope="col" width="10%">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -32,6 +34,8 @@
               <td>{{ $game->title }}</td>
               <td>  <img width="50" class="circle" src="{{ asset($game->img_url) }}" alt=""/></td>
               <td>{{ $game->status ? 'Active' : 'Inactive' }}</td>
+              <td> <a class="btn btn-link" href="/ratings/{{$game->id}}">View Ratings</a></td>
+              <td> <a class="btn btn-danger btn-sm" href="/games/delete/{{$game->id}}">Delete</a></td>
             </tr>
             @endforeach
 

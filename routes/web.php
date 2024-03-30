@@ -22,7 +22,7 @@ Route::controller(AdminController::class)->middleware('auth:moderator')->group(f
     Route::get('/games/delete/{id}', 'gameDelete');
     
     // review view route
-    Route::get('/reviews', 'reviewListScreen');
+    Route::get('/ratings/{id}', 'reviewView');
     
     // sign-out route
     Route::get('/logout', 'logout');

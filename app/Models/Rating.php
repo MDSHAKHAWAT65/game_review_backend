@@ -14,7 +14,8 @@ class Rating extends Model
         'user_id',
         'rating',
         'comment',
-        'coordinate'
+        'coordinate',
+        'coordinate_info',
     ];
 
     public function user() {
