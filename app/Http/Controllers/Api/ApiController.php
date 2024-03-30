@@ -43,6 +43,13 @@ class ApiController extends Controller
 
         $data['user_id'] = auth()->user()->id;
         $data['coordinate'] = $details->loc;
+        $data['coordinate_info'] = json_encode([
+            'ip' => $details->ip,
+            'city' => $details->city,
+            'region' => $details->region,
+            'country' => $details->country,
+            'postal' => $details->postal,
+        ]);
 
         $game = Game::findOrFail($request->game_id);
         $game->ratings()->create($data);
